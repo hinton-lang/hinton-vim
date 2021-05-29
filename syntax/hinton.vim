@@ -5,30 +5,52 @@
 
 if exists("b:current_syntax")
 	finish
-endinf
-
-let s:cpo_save = &cpo
-set cpo&vim
-
-let s:hinton_syntax_keywords = {
-	\ 'hintonBoolean': ["true"
-	\,				"false"]
-	\, 'hintonKeyword': ["func"
-	\, 					"const"]
-}
+endif
 
 
-function! s:syntax_keyword(dict)
-	for key in keys(a:dict)
-		execute 'syntax keyword' key join(a:dict[key], '')
-	endfor
-endfunction
+
+syntax keyword hintonKeyword if elsif else let const var false
+syntax keyword hintonKeyword class return true false break null in continue async await yield sync try on catch finally throw
+syntax keyword hintonFunction func print while for
 
 
-call s:syntax_keyword(s:hinton_syntax_keywods)
+syntax region  hintonBlock start="{" end="}" transparent fold
 
-syntax match hintonType "\v[iu][1-9]\d"
-syntax match hintonOperator display "\v\[-+/*=^&?|!><%~]"
+syntax match hintonComment "/\\*\\*/"
+highlight link hintonComment Comment
+
+"" Numbers
+syntax match hintonBinNumer display "\v<0b[01]%(_?[01])*"
 
 
-highlight default link hintonKeyword Keyword
+
+"" Operators
+syntax match hintonOperator "\V\[-+/*=^&?|!><%~]"
+syntax match hintonOperator "\v\*"
+syntax match hintonOperator "\v/*"
+syntax match hintonOperator "\v\+"
+syntax match hintonOperator "\v\-"
+syntax match hintonOperator "\v\?*"
+syntax match hintonOperator "\v\*\="
+syntax match hintonOperator "\v\+\="
+syntax match hintonOperator "\v-\="
+syntax match hintonOperator "\v\=\="
+syntax match hintonOperator "\v\:\="
+syntax match hintoOperator "\v\<"
+syntax match hintonOperator "\v\>"
+syntax match hintonOperator "\v\="
+syntax match hintonOperator "\v\<\="
+
+"" Strings
+syntax region hintonString start=/\v"/ skip=/\v\\./ end=/\v"/
+highlight link hintonString String
+
+highlight link hintonKeyword Keyword
+highlight link hintonFunction Function
+highlight link hintonOperator Operator
+highlight link hintonBinNumber Number
+highlight link hintonEntityFunction Function
+
+
+let b:current_sytax = "hinton"
+

@@ -1,5 +1,6 @@
 " Vim syntax file
 " Language: Hinton
+" Maintainer: rolEYder
 " Revision: 04/29/2021
 
 

@@ -3,8 +3,8 @@ if exists("g:hinton_loaded")
 endif
 let g:hinton_loaded = 1
 			
-function! s: fmt_autosave()
-	if get(g:, "hintom_fmt_autosave", 1)
+function! s:fmt_autosave()
+	if get(g:, "hinton_fmt_autosave", 1)
 		call hinton#fmt#Format()
 	endif
 endfunction
